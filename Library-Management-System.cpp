@@ -18,11 +18,8 @@ int status=0;
 string studid;
 };
 
-void issuebooks(void);
-
-int main() {
-
-    string bookid, returnedbookid;
+void issuebooks(void){
+ string bookid, returnedbookid;
     string sname;
     student s1[50];
     book b1[50];
@@ -104,5 +101,11 @@ case 3: {
 
     }
     }
+};
+
+int main() {
+    issuebooks();
+
+
     return 0;
 }
