@@ -13,7 +13,7 @@ float payment;
 
 void access(int &option);//navigates to either student or librarian
 void librarian(string &f_name,string &l_name);//librarians menu
-void student();//students menu
+void student(string &f_name,string &l_name);//students menu
 void new_entry();
 void addstudent();
 void chkavail();//check book availability
@@ -217,6 +217,7 @@ system("cls");
     for (int i=0;i<119;i++){
     cout<<char(2550);
     }
+    cout<<endl;
     cout<<setw(70)<<"Enter your librarian info to login: "<<endl;
   //  cout<<setw(45)<<"\t\t ______________________________________________________________________"<<endl;
 
@@ -234,7 +235,7 @@ system("cls");
              if(f_name==(lib_info+i)->f_name && l_name==(lib_info+i)->l_name && password==(lib_info+i)->password)
         {
         counter++;
-        avail_check = &((lib_info+i)->f_name);
+
         }
         }
         if(counter==1)
@@ -270,7 +271,7 @@ else if (option==2)
     for (int i=0;i<119;i++){
     cout<<char(2550);
     }
-    cout<<"User name: ";
+    cout<<endl<<"User name: ";
     cin>>f_name;
     cin>>l_name;
 
@@ -281,13 +282,13 @@ else if (option==2)
     {
     if(f_name==(stud_info+i)->f_name && l_name==(stud_info+i)->l_name && password==(stud_info+i)->password)
     {
-       avail_check = &((stud_info+i)->f_name);
+
        counter++;
     }
     }
     if (counter!=0)
     {
-
+    return student(f_name,l_name);
     }
     else
     {
@@ -445,13 +446,16 @@ void student(string &f_name,  string &l_name )
     for (int i=0;i<119;i++){
     cout<<char(2550);
     }
+    cout<<endl;
     mainstumenu:
    //   cout<<setw(45)<<"\t\t ______________________________________________________________________"<<endl;
     cout<<setw(45)<<"Welcome  "<<f_name<<" "<<l_name<<"..."<<"\n\n";
 
     for (int i=0;i<119;i++){
     cout<<char(2550);
+
     }
+    cout<<endl;
    // cout<<setw(45)<<"\t\t ______________________________________________________________________"<<endl;
     cout<<setw(70)<<"What would you like to do\n\n";
     cout<<setw(65)<<"1.Search for a book.\n\n";
@@ -465,6 +469,7 @@ void student(string &f_name,  string &l_name )
     for (int i=0;i<119;i++){
     cout<<char(2550);
     }
+    cout<<endl;
   //  cout<<setw(45)<<"\t\t ______________________________________________________________________"<<endl;
 
 int option;
