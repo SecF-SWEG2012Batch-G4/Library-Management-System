@@ -15,7 +15,7 @@ void access(int &option);//navigates to either student or librarian
 void librarian(string &f_name,string &l_name);//librarians menu
 void student();//students menu
 void new_entry();
-//void newStudent(); coming soon
+void addstudent();
 void chkavail();//check book availability
 void showBooks();
 void search();
@@ -23,9 +23,6 @@ void welcome();
 void showCategory();
 void removeBook();
 void searchBook();
-//void searchStudent(); coming soon
-//void viewStudent();coming soon
-//void deleteStudent(); cooming soon
 void report();
 void issueReturn();
 void showRate();
@@ -46,7 +43,6 @@ struct bookinfo
    int id;//book id
    float rating;//(out of 5)
    int status;
-   //bool avail;//books availability
    string location;
    string studid;
    date return_date,issue_date,due_date;
@@ -68,7 +64,7 @@ bookinfo* Cbook_info = new bookinfo [totalBooks];
 struct phone
 {
  int areacode;
- int num;
+ int number;
 };
 
 struct student
@@ -111,12 +107,10 @@ int totalstudents=4;
 
 int main()
 {
-    welcome();
-     //Search();
-    //new_entry();
-   // chkavail();
+   welcome();
 
-}
+
+};
 void welcome()
 {
     int option,*opt;
@@ -180,7 +174,7 @@ void chkavail()
         amount_check= &((book_info+i)->amount);
         name_check = &((book_info+i)->name);
         author_check=&((book_info+i)->author);
-        //avail_check = &((book_info+i)->name);
+
         }
         }
     cout<<char(201);
@@ -303,6 +297,63 @@ else if (option==2)
 }
 }
 
+void addstudent()
+{
+    int n;
+    cout<<char(201);
+    for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+    cout<<setw(70)<<"How many new users do you want to register.";
+    cin>>n;
+        n+=totalstudents;
+
+
+    for (int i=totalstudents;i<n;i++)
+    {
+        for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+        cout<<setw(50)<<"Info for new student of ID:0"<<i+1<<endl;
+        for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+        cout<<setw(0)<<"\nEnter the Full name of the student: ";     cin>>(stud_info+i)->f_name>>(stud_info+i)->l_name;
+        cout<<setw(40)<<"\nEnter the Area code for the student: ";    cin>>(stud_info+i)->pn.areacode;
+        cout<<setw(40)<<"\nEnter the Phone Number for the student: "; cin>>(stud_info+i)->pn.number;
+        cout<<setw(40)<<"\nEnter a password for this account: ";       cin>>(stud_info+i)->password;
+    }
+
+    system("cls");
+
+    for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+
+
+    cout<<setw(70)<<"INFORMATION FOR ALL STUDENTS"<<endl;
+
+    for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+     for (int i=0;i<n;i++)
+    {
+        for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+        cout<<setw(70)<<"Info for student: "<<i+1<<endl;
+        for (int i=0;i<119;i++){
+    cout<<char(2550);
+    }
+        cout<<setw(70)<<"\nFull name : ";                            cout<<(stud_info+i)->f_name<<" "<<(stud_info+i)->l_name<<endl;
+        cout<<setw(70)<<"\nArea code for the student: ";             cout<<(stud_info+i)->pn.areacode<<endl;;
+        cout<<setw(70)<<"\nPhone Number : ";                         cout<<(stud_info+i)->pn.number<<endl;;
+        cout<<setw(70)<<"\nPassword for this account: ";             cout<<(stud_info+i)->password<<endl;;
+        cout<<setw(70)<<"\nThe designated ID for this account is: "; cout<<(stud_info+i)->sid+i<<endl;;
+}
+
+}
+
 void librarian(string &f_name,string &l_name)
 {
 
@@ -338,7 +389,7 @@ void librarian(string &f_name,string &l_name)
     switch (option){
 
     case 1:{
-    	//newStudent();
+    	addstudent();
 		break;
     }
     case 2:
@@ -697,121 +748,6 @@ void removeBook(){
     }
 cout<<"BOOK DELETED";
 }
-/*void searchStudent(){
-	        int searchOption, studId;
-searchMenu:
-system("cls");
-cout<<"How would you like to search the Student?"<<endl;
-cout<<"\n 1. Using Student ID \n2. Using Student name \n "<<endl;
-cout<<"\nEnter you choice: ";
-cin>>searchOption;
-switch (searchOption){
-    case 1:{
-
-
-    system ("cls");
-    cout<<"Enter student ID: ";
-   bool studFound = false;
-    cin>>studId;
-    for(int i=0; i<totalStudents; i++){
-      if(studId== (stud_info+i)->id ){
-        cout<<"Student ID: "<<(stud_info+i)->id<<endl;
-        cout<<"First name : "<<(stud_info+i)->f_name<<endl;
-        cout<<"Last name: "<<(stud_info+i)->l_name<<endl;
-        cout<<"Phone number: "<<(stud_info+i)->pn.areacode<<(stud_info+i)->pn.num<<endl;
-        studFound = true;
-
-
-      }}
-      if (studFound == false){
-	   cout<<"There is no student with the given ID"<<endl;
-	   system ("pause");
-	  goto searchMenu;}
-	  break;
-  }
-
-    case 2:{
-    	system("cls");
-    bool nameFound = false;
-    cout<<"Enter Students first name: ";
-    string fName, lName;
-    cin.ignore();
-    getline(cin, fName);
-    cout<<"Enter students last name: ";
-    cin.ignore();
-    getline(cin, lName);
-    for (int i=0; i<totalStudents; i++){
-        if(fName==(stud_info+i)->f_name && (lName == (stud_info+i)->l_name )){
-        cout<<"Student ID: "<<(stud_info+i)->id<<endl;
-        cout<<"First name : "<<(stud_info+i)->f_name<<endl;
-        cout<<"Last name: "<<(stud_info+i)->l_name<<endl;
-        cout<<"Phone number: "<<(stud_info+i)->pn.areacode<<(stud_info+i)->pn.num<<endl;
-        nameFound = true;
-        }}
-         if (nameFound== false)
-		 {cout<<"There is no student with the given name"<<endl;
-		 system ("pause");
-		 goto searchMenu;}
-    break;
-}
-
-default: {cout<<"Please enter a valid Option";
-system("pause");
-goto searchMenu;}
-}
-}
-void viewStudents(){
-
-       	for(int i =0; i<totalStudents; i++){
-
-    cout<<"=====================================================================================================\n";
-    cout<<"No"<<setw(15)<<"Student ID"<<setw(30)<<"First Name"<<setw(30)<<"Last name"<<setw(20)<<"Phone number"<<setw(15)<<"\n";
-    cout<<"------------------------------------------------------------------------------------------------------\n";
-    cout<<i+1<<")"<<setw(15)<<(stud_info+i)->id<<setw(30)<<(stud_info+i)->f_name<<setw(27)<<(stud_info+i)->l_name<<setw(18)<<"+"<<(stud_info+i)->pn.areacode<<(stud_info+i)->pn.num<<endl;
-}
-}*/
-/*void deleteStudent(){
-int num, ID, x, jumper= 0;
-	//showbook();
-	cout<<"Enter the ID of the student you want to delete : ";
-	cin>>ID;
-	num= ID - 1001 ;
-	x = totalStudents;
-	totalStudents--;
-	delete[] Cstud_info;
-	Cstud_info = new student[totalStudents];
-
-	 for (int i= 0; i <x; i++)
-    {
-        if (i != num)
-        {
-            Cstud_info[jumper].f_name = stud_info[i].f_name;
-            Cstud_info[jumper].l_name = stud_info[i].l_name;
-            Cstud_info[jumper].id = stud_info[i].id;
-            Cstud_info[jumper].password = stud_info[i].password;
-            Cstud_info[jumper].pn.areacode = stud_info[i].pn.areacode;
-            Cstud_info[jumper].pn.num = stud_info[i].pn.num;
-
-            jumper++;
-        }
-    }
-    delete [] stud_info;
-    stud_info = new student[totalStudents];
-    for (int i= 0; i <totalStudents; i++)
-    {
-
-            stud_info[i].f_name = Cstud_info[i].f_name;
-            stud_info[i].l_name = Cstud_info[i].l_name;
-            stud_info[i].id = Cstud_info[i].id;
-            stud_info[i].password = Cstud_info[i].password;
-            stud_info[i].pn.areacode = Cstud_info[i].pn.areacode;
-            stud_info[i].pn.num = Cstud_info[i].pn.num;
-
-
-
-    }
-cout<<"STUDENT DELETED";
-}*/
 void searchBook(){
 	int searchOption, bookId;
 searchMenu:
